@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kafkafirst.service.KafkaSenderService;
+import kakfafirst.model.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,13 +21,18 @@ public class ProducerController {
 	@Autowired
 	KafkaSenderService kafkaSenderService;
 	
-	@PostMapping(path = "/message", consumes = MediaType.ALL_VALUE, produces = MediaType.ALL_VALUE)
+	@PostMapping(path = "/message", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> publishMessageToTopic (@RequestBody String message) {
-		log.debug("[controller] message received: " + message);
-		
+		log.info("[controller] message received: " + message);
+
 		kafkaSenderService.sendMessageToTopic(message);
 		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body("request accepted");
+		ApiResponse rspApi = ApiResponse.builder().http_code(HttpStatus.ACCEPTED.value())
+				.status(HttpStatus.ACCEPTED.toString())
+				.message("Request accepted")
+				.build();
+		
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(rspApi);
 		
 	}
 	
