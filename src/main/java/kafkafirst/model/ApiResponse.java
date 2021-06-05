@@ -1,4 +1,4 @@
-package kakfafirst.model;
+package kafkafirst.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
