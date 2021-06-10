@@ -7,8 +7,9 @@ import org.apache.kafka.common.serialization.Serializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Example class
- * @author fab
+ * Example class. NOT implemented.
+ * 
+ * @author Fabrizio Sosa
  *
  */
 public class CustomSerializer implements Serializer<Integer>{

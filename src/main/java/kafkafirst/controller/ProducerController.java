@@ -23,17 +23,18 @@ public class ProducerController {
 	
 	@PostMapping(path = "/message", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> publishMessageToTopic (@RequestBody String message) {
-		log.info("[controller] message received: " + message);
+		log.debug("[controller] message received: " + message);
 
 		kafkaSenderService.sendMessageToTopic(message);
 		
-		ApiResponse rspApi = ApiResponse.builder().http_code(HttpStatus.ACCEPTED.value())
+		ApiResponse rspApi = ApiResponse.builder()
+				.http_code(HttpStatus.ACCEPTED.value())
 				.status(HttpStatus.ACCEPTED.toString())
 				.message("Request accepted")
-				.build();
+					.build();
 		
+		log.debug("[controller] returning response to user. Status: " + rspApi.getStatus());
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(rspApi);
-		
 	}
 	
 	

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class KafkaSenderService {
 	
@@ -14,7 +17,7 @@ public class KafkaSenderService {
 	KafkaTemplate<String, String> kafkaTemplate;
 	
 	public void sendMessageToTopic(String message) {
-		//kafkaTemplate.sendDefault(message);
+		// kafkaTemplate.sendDefault(message);
 		// Handling with callback for async proccesing
 		ListenableFuture<SendResult<String, String>> future = kafkaTemplate.sendDefault(message);
 		
@@ -22,12 +25,12 @@ public class KafkaSenderService {
 
 	        @Override
 	        public void onSuccess(SendResult<String, String> result) {
-	            System.out.println("Sent message=[" + message + 
+	            log.debug("Sent message=[" + message + 
 	              "] with offset=[" + result.getRecordMetadata().offset() + "]");
 	        }
 	        @Override
 	        public void onFailure(Throwable ex) {
-	            System.out.println("Unable to send message=[" 
+	            log.debug("Unable to send message=[" 
 	              + message + "] due to : " + ex.getMessage());
 	        }
 	    });

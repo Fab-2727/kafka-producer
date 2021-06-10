@@ -6,6 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+
+/**
+ * Standard API response.
+ * 
+ * @param http_code Integer
+ * @param status String
+ * @param message String
+ * 
+ * @author Fabrizio Sosa
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor
