@@ -9,10 +9,5 @@ A kafka producer that uses StringSerializer for it keys and values.
 	- Implementation of kafkaTemplate
 	- Inner functionality of Kakfa (Cluster, broker, topic, partition, offset)
 
-### How to run it
-
-Dependencies:
-	Java 11
-	Maven
-	Kafka
-
+### Dependencies
+Java 11 - Maven - Kafka
